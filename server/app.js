@@ -41,7 +41,7 @@ app.get("/movies", async (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-  const { title } = req.query;
+  const title = req.query["title"].replace(/[.,/#!$%^&*;:'{}=\-_`~()]/g, "");
   console.log("===");
   console.log(title);
   try {
@@ -52,6 +52,7 @@ app.get("/search", async (req, res) => {
                 `;
 
     const result = await db.any(query);
+    console.log(result);
     res.json(result);
   } catch (err) {
     res.status(500).send(err.message);
