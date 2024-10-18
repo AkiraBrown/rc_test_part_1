@@ -5,7 +5,23 @@ const logger = require("morgan");
 
 const app = express();
 
-app.use(cors());
+const targetUrl =
+  process.env.NODE_ENV === "production"
+    ? "<INSERT DEPLOYED FRONTEND LINK>"
+    : "http://localhost:3000";
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (origin === targetUrl) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS").message, false);
+    }
+  },
+  methods: ["GET"],
+  maxAge: 3600,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(express.json());
 
