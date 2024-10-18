@@ -48,10 +48,10 @@ app.get("/search", async (req, res) => {
     const query = `
                   SELECT *
                   FROM movies
-                  WHERE title ILIKE '${title}';
+                  WHERE title ILIKE $1;
                 `;
 
-    const result = await db.any(query);
+    const result = await db.any(query, title);
     console.log(result);
     res.json(result);
   } catch (err) {
