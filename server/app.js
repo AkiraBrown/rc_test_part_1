@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const pgp = require("pg-promise")();
+const helmet = require("helmet");
 const logger = require("morgan");
 
 const app = express();
@@ -22,6 +23,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+app.use(helmet());
 app.use(logger("dev"));
 app.use(express.json());
 
@@ -58,6 +60,7 @@ app.get("/movies", async (req, res) => {
 
 app.get("/search", async (req, res) => {
   const title = req.query["title"].replace(/[.,/#!$%^&*;:'{}=\-_`~()]/g, "");
+  const sanitisedTitle = title.replace(/</g, "").replace(/>/g, "");
   console.log("===");
   console.log(title);
   try {
@@ -67,7 +70,7 @@ app.get("/search", async (req, res) => {
                   WHERE title ILIKE $1;
                 `;
 
-    const result = await db.any(query, title);
+    const result = await db.any(query, sanitisedTitle);
     console.log(result);
     res.json(result);
   } catch (err) {

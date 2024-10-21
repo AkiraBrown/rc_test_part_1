@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { sanitize } from "dompurify";
 
 const SearchMovies = () => {
   const [title, setTitle] = useState("");
@@ -8,13 +9,13 @@ const SearchMovies = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     const sanitisedTitle = title.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
-    console.log(sanitisedTitle);
     try {
       const response = await axios.get(
         `http://localhost:3001/search?title=${sanitisedTitle}`
       );
-      console.log(response);
-      setResults(response.data);
+      let stringifiedRes = sanitize(JSON.stringify(response.data));
+      stringifiedRes = JSON.parse(stringifiedRes);
+      setResults(stringifiedRes);
       setTitle("");
     } catch (error) {
       console.error("Error fetching data:", error);
