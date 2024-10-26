@@ -123,6 +123,15 @@ My main source of research was the [OWASP Cheatsheet](https://cheatsheetseries.o
 - [Template Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 - [OWASP CheatSheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
 - [Cloudflare](https://www.cloudflare.com/en-gb/learning/security/how-to-prevent-xss-attacks/)
+- [Exploit-DB Helpdesk XSS](https://www.exploit-db.com/exploits/52068)
+- [github repository](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/SQL%20Injection/PostgreSQL%20Injection.md#postgresql-stacked-query)
+- [CORS options](https://www.npmjs.com/package/cors#configuring-cors)
+- [dangerouslySetInnerHTML](https://legacy.reactjs.org/docs/dom-elements.html)
+- [DOMPurify](https://www.npmjs.com/package/dompurify)
+- [Cross-Site Scripting](https://owasp.org/www-community/attacks/xss/)
+- [Input sanitization](https://www.esecurityplanet.com/endpoint/prevent-web-attacks-using-input-sanitization/)
+- [Preventing SQL Injections](https://www.esecurityplanet.com/threats/how-to-prevent-sql-injection-attacks/#testing-for-sql-injection-vulnerabilities)
+- [Postman Testing Suite](https://www.postman.com/postman/postman-api-monitoring-examples/documentation/bc4b4bg/example-04-check-for-common-api-vulnerability)
 
 ### Solutions
 
