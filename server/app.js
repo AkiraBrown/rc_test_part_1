@@ -36,17 +36,6 @@ const cn = {
 
 const db = pgp(cn);
 
-app.get("/users", async (req, res) => {
-  try {
-    const query = "SELECT * FROM users";
-    const result = await db.any(query);
-    res.json(result);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ error: "Failed to fetch users" });
-  }
-});
-
 app.get("/movies", async (req, res) => {
   try {
     const query = "SELECT * FROM movies";
@@ -59,10 +48,8 @@ app.get("/movies", async (req, res) => {
 });
 
 app.get("/search", async (req, res) => {
-  const title = req.query["title"].replace(/[.,/#!$%^&*;:'{}=\-_`~()]/g, "");
+  const title = req.query["title"].replace(/[.,/#!$%^&*;:{}=\-_~()]/g, "");
   const sanitisedTitle = title.replace(/</g, "").replace(/>/g, "");
-  console.log("===");
-  console.log(title);
   try {
     const query = `
                   SELECT *
@@ -71,7 +58,6 @@ app.get("/search", async (req, res) => {
                 `;
 
     const result = await db.any(query, sanitisedTitle);
-    console.log(result);
     res.json(result);
   } catch (err) {
     res.status(500).send(err.message);

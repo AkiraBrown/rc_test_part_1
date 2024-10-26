@@ -8,7 +8,7 @@ const SearchMovies = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    const sanitisedTitle = title.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+    const sanitisedTitle = title.replace(/[./#!$%^&*;:{}=\-_~()]/g, "");
     try {
       const response = await axios.get(
         `http://localhost:3001/search?title=${sanitisedTitle}`
@@ -18,6 +18,7 @@ const SearchMovies = () => {
       setResults(stringifiedRes);
       setTitle("");
     } catch (error) {
+      alert("Error", error);
       console.error("Error fetching data:", error);
     }
   };
@@ -41,7 +42,7 @@ const SearchMovies = () => {
           Movie Title:
           <input
             type="text"
-            pattern="[A-Za-z0-9\s]+"
+            pattern="[`',A-Za-z0-9\s]+"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
